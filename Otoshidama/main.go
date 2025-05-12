@@ -8,6 +8,8 @@ import (
 	"strings"
 )
 
+//O(n^3)
+
 func main() {
 	var x, y, z int
 	scanner := bufio.NewScanner(os.Stdin)
@@ -45,4 +47,31 @@ func main() {
 	x, y, z = -1, -1, -1
 	fmt.Printf("%d %d %d", x, y, z)
 
+}
+
+// O(n)
+func main2() {
+	var x, y, z int
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	field := strings.Fields(scanner.Text())
+	n, _ := strconv.Atoi(field[0])
+	sum, _ := strconv.Atoi(field[1])
+
+	if sum > 10000*n {
+		x, y, z = -1, -1, -1
+		fmt.Printf("%d %d %d", x, y, z)
+		return
+	}
+
+	for x = n; x >= 0; x-- {
+		if (sum-1000*n-9000*x)%4000 == 0 {
+			y = (sum - 1000*n - 9000*x) / 4000
+			if y >= 0 && y <= n-x {
+				z = n - x - y
+				fmt.Printf("%d %d %d", x, y, z)
+				return
+			}
+		}
+	}
 }
