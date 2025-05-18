@@ -31,21 +31,38 @@ func main() {
 	}
 
 	length := len(input[max])
-	for index, s := range input[max] {
-		output := [12]int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-		if index == length-1 {
-			output[0] = 100
-		} else {
-			output[index+1] = 100
-		}
-		fmt.Printf("%c %d %d %d %d %d %d %d %d %d %d %d %d\n", s, output[0], output[1], output[2], output[3], output[4], output[5], output[6], output[7], output[8], output[9], output[10], output[11])
-	}
+	output(input[max])
 
 	if length < M {
+		max2 := 0
+		for ex2, value := range input {
+			if len(value) <= M-length {
+				if max < ex2 {
+					max = ex2
+				}
+			}
+		}
+		if max2 != 0 {
+			output(input[max2])
+			length = M - length - len(input[max2])
+		}
+
 		for i := M - length; i > 0; i-- {
 			output := [12]int{100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 			fmt.Printf("%c %d %d %d %d %d %d %d %d %d %d %d %d\n", 'a', output[0], output[1], output[2], output[3], output[4], output[5], output[6], output[7], output[8], output[9], output[10], output[11])
 		}
 	}
 
+}
+
+func output(sentence string) {
+	for index, s := range sentence {
+		output := [12]int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+		if index == len(sentence)-1 {
+			output[0] = 100
+		} else {
+			output[index+1] = 100
+		}
+		fmt.Printf("%c %d %d %d %d %d %d %d %d %d %d %d %d\n", s, output[0], output[1], output[2], output[3], output[4], output[5], output[6], output[7], output[8], output[9], output[10], output[11])
+	}
 }
