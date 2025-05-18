@@ -10,60 +10,33 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	input := scanner.Text()
-	length := len(input)
-
-	pointer := 0
-	//dream dreamer erase eraser
-	for pointer < length-1 {
-		if len(input) >= 5 && input[:5] == "dream" {
-			if len(input) >= 7 && input[:7] == "dreamer" {
-				if len(input) >= 8 && input[5:8] != "ase" {
-					pointer += 5
-					input = input[5:]
-					continue
-				}
-				if len(input) >= 9 && input[5:9] != "aser" {
-					pointer += 5
-					input = input[5:]
-					continue
-				}
-				pointer += 7
-				if pointer == length {
-					fmt.Println("YES")
-					break
-				}
-				input = input[7:]
-				continue
-			}
-			pointer += 5
-			if pointer == length {
-				fmt.Println("YES")
-				break
-			}
-			input = input[5:]
+	if input == "" {
+		fmt.Println("NO")
+		return
+	}
+	pointer := len(input)
+	for pointer > 0 {
+		if pointer >= 5 && input[pointer-5:pointer] == "dream" {
+			pointer -= 5
 			continue
 		}
-		if len(input) >= 5 && input[:5] == "erase" {
-			if len(input) >= 6 && input[:6] == "eraser" {
-				pointer += 6
-				if pointer == length {
-					fmt.Println("YES")
-					break
-				}
-				input = input[6:]
-				continue
-			}
-			pointer += 5
-			if pointer == length {
-				fmt.Println("YES")
-				break
-			}
-			input = input[5:]
+		if pointer >= 5 && input[pointer-5:pointer] == "erase" {
+			pointer -= 5
+			continue
+		}
+		if pointer >= 6 && input[pointer-6:pointer] == "eraser" {
+			pointer -= 6
+			continue
+		}
+		if pointer >= 7 && input[pointer-7:pointer] == "dreamer" {
+			pointer -= 7
 			continue
 		}
 		break
 	}
-	if pointer != length {
+	if pointer != 0 {
 		fmt.Println("NO")
+	} else {
+		fmt.Println("YES")
 	}
 }
