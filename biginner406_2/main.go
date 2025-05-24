@@ -13,6 +13,7 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	line1 := InputConvert(scanner)
 	line2 := InputConvert(scanner)
+
 	result := big.NewInt(1)
 	max := big.NewInt(1)
 
